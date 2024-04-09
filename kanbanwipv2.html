@@ -10,7 +10,7 @@
         margin: 0;
         padding: 0;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
         min-height: 100vh;
         background-color: green; /* Default color */
@@ -22,6 +22,7 @@
         border-radius: 5px;
         background-color: white;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
     }
     input[type="number"] {
         width: 100%;
@@ -49,12 +50,7 @@
         border-radius: 5px;
         margin: 0 10px;
         position: relative;
-    }
-    .add-task-button {
-        padding: 5px 10px;
-        border: 1px dashed #999;
-        border-radius: 5px;
-        cursor: pointer;
+        min-height: 100px;
     }
     .task {
         margin-bottom: 5px;
@@ -78,18 +74,17 @@
     </div>
 
     <div class="kanban-board">
-        <div class="column" id="todo" onclick="moveTask('todo')">
+        <div class="column" id="todo" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
             <h3>To-Do</h3>
-            <div id="todo-tasks"></div>
-            <button class="add-task-button" onclick="addTask()">Add Task</button>
+            <div id="todo-tasks" ondragstart="drag(event)" draggable="true"></div>
         </div>
-        <div class="column" id="inProgress" onclick="moveTask('inProgress')">
+        <div class="column" id="inProgress" ondrop="drop(event, 'inProgress')" ondragover="allowDrop(event)">
             <h3>In Progress</h3>
-            <div id="inProgress-tasks"></div>
+            <div id="inProgress-tasks" ondragstart="drag(event)" draggable="true"></div>
         </div>
-        <div class="column" id="completed" onclick="moveTask('completed')">
+        <div class="column" id="completed" ondrop="drop(event, 'completed')" ondragover="allowDrop(event)">
             <h3>Completed</h3>
-            <div id="completed-tasks"></div>
+            <div id="completed-tasks" ondragstart="drag(event)" draggable="true"></div>
         </div>
     </div>
 
@@ -111,9 +106,9 @@
         }
 
         function updateKanbanBoard() {
-            document.getElementById("todo-tasks").innerHTML = tasks.todo.map(task => "<div class='task' onclick='selectTask(this)'>" + task + "</div>").join("");
-            document.getElementById("inProgress-tasks").innerHTML = tasks.inProgress.map(task => "<div class='task' onclick='selectTask(this)'>" + task + "</div>").join("");
-            document.getElementById("completed-tasks").innerHTML = tasks.completed.map(task => "<div class='task' onclick='selectTask(this)'>" + task + "</div>").join("");
+            document.getElementById("todo-tasks").innerHTML = tasks.todo.map(task => "<div class='task' id='" + task + "' draggable='true' ondragstart='drag(event)'>" + task + "</div>").join("");
+            document.getElementById("inProgress-tasks").innerHTML = tasks.inProgress.map(task => "<div class='task' id='" + task + "' draggable='true' ondragstart='drag(event)'>" + task + "</div>").join("");
+            document.getElementById("completed-tasks").innerHTML = tasks.completed.map(task => "<div class='task' id='" + task + "' draggable='true' ondragstart='drag(event)'>" + task + "</div>").join("");
         }
 
         function addTask() {
@@ -124,24 +119,23 @@
             }
         }
 
-        function moveTask(column) {
-            if (selectedTask) {
-                tasks[column].push(selectedTask.innerText);
-                tasks.todo = tasks.todo.filter(task => task !== selectedTask.innerText);
-                tasks.inProgress = tasks.inProgress.filter(task => task !== selectedTask.innerText);
-                tasks.completed = tasks.completed.filter(task => task !== selectedTask.innerText);
-                selectedTask = null;
-                updateKanbanBoard();
-            }
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
         }
 
-        var selectedTask = null;
-        function selectTask(taskElement) {
-            if (selectedTask) {
-                selectedTask.style.backgroundColor = "#fff";
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev, column) {
+            ev.preventDefault();
+            var taskId = ev.dataTransfer.getData("text");
+            var taskIndex = tasks.todo.indexOf(taskId);
+            if (taskIndex > -1) {
+                tasks.todo.splice(taskIndex, 1);
+                tasks[column].push(taskId);
+                updateKanbanBoard();
             }
-            selectedTask = taskElement;
-            selectedTask.style.backgroundColor = "#f0f0f0";
         }
 
         updateKanbanBoard();
