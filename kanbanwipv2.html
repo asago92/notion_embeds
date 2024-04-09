@@ -37,6 +37,17 @@
         border-radius: 5px;
         cursor: pointer;
     }
+    .kanban-board {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+    .column {
+        flex: 1;
+        padding: 10px;
+        background-color: #f7f7f7;
+        border-radius: 5px;
+    }
 </style>
 </head>
 <body>
@@ -48,9 +59,27 @@
         <input type="number" id="adjustedThroughput" placeholder="Enter adjusted weekly throughput"><br>
         <button onclick="calculateWipLimit()">Calculate WIP Limit</button>
         <p id="wipLimit"></p>
+
+        <div class="kanban-board">
+            <div class="column" id="todo">
+                <h3>To-Do</h3>
+            </div>
+            <div class="column" id="inProgress">
+                <h3>In Progress</h3>
+            </div>
+            <div class="column" id="completed">
+                <h3>Completed</h3>
+            </div>
+        </div>
     </div>
 
     <script>
+        var tasks = {
+            todo: [],
+            inProgress: [],
+            completed: []
+        };
+
         function calculateWipLimit() {
             var teamCapacity = parseInt(document.getElementById("teamCapacity").value);
             var adjustedThroughput = parseInt(document.getElementById("adjustedThroughput").value);
@@ -60,6 +89,23 @@
             // Change background color based on WIP limit
             document.body.style.backgroundColor = (wipLimit <= teamCapacity) ? 'red' : 'green';
         }
+
+        function updateKanbanBoard() {
+            document.getElementById("todo").innerHTML = "<h3>To-Do</h3>" + tasks.todo.map(task => "<p>" + task + "</p>").join("");
+            document.getElementById("inProgress").innerHTML = "<h3>In Progress</h3>" + tasks.inProgress.map(task => "<p>" + task + "</p>").join("");
+            document.getElementById("completed").innerHTML = "<h3>Completed</h3>" + tasks.completed.map(task => "<p>" + task + "</p>").join("");
+        }
+
+        function addTask(column) {
+            var task = prompt("Enter task:");
+            if (task) {
+                tasks[column].push(task);
+                updateKanbanBoard();
+            }
+        }
+
+        updateKanbanBoard();
     </script>
 </body>
 </html>
+
