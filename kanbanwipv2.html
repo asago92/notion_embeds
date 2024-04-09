@@ -47,6 +47,18 @@
         padding: 10px;
         background-color: #f7f7f7;
         border-radius: 5px;
+        margin: 0 10px;
+        position: relative;
+    }
+    .add-task-button {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 1px dashed #999;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
     }
 </style>
 </head>
@@ -61,14 +73,20 @@
         <p id="wipLimit"></p>
 
         <div class="kanban-board">
-            <div class="column" id="todo" onclick="addTask('todo')">
+            <div class="column" id="todo">
                 <h3>To-Do</h3>
+                <div id="todo-tasks"></div>
+                <button class="add-task-button" onclick="addTask('todo')">Add Task</button>
             </div>
-            <div class="column" id="inProgress" onclick="addTask('inProgress')">
+            <div class="column" id="inProgress">
                 <h3>In Progress</h3>
+                <div id="inProgress-tasks"></div>
+                <button class="add-task-button" onclick="addTask('inProgress')">Add Task</button>
             </div>
-            <div class="column" id="completed" onclick="addTask('completed')">
+            <div class="column" id="completed">
                 <h3>Completed</h3>
+                <div id="completed-tasks"></div>
+                <button class="add-task-button" onclick="addTask('completed')">Add Task</button>
             </div>
         </div>
     </div>
@@ -91,9 +109,9 @@
         }
 
         function updateKanbanBoard() {
-            document.getElementById("todo").innerHTML = "<h3>To-Do</h3>" + tasks.todo.map(task => "<p>" + task + "</p>").join("");
-            document.getElementById("inProgress").innerHTML = "<h3>In Progress</h3>" + tasks.inProgress.map(task => "<p>" + task + "</p>").join("");
-            document.getElementById("completed").innerHTML = "<h3>Completed</h3>" + tasks.completed.map(task => "<p>" + task + "</p>").join("");
+            document.getElementById("todo-tasks").innerHTML = tasks.todo.map(task => "<p>" + task + "</p>").join("");
+            document.getElementById("inProgress-tasks").innerHTML = tasks.inProgress.map(task => "<p>" + task + "</p>").join("");
+            document.getElementById("completed-tasks").innerHTML = tasks.completed.map(task => "<p>" + task + "</p>").join("");
         }
 
         function addTask(column) {
@@ -108,5 +126,6 @@
     </script>
 </body>
 </html>
+
 
 
