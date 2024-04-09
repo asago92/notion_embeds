@@ -51,13 +51,17 @@
         position: relative;
     }
     .add-task-button {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        border: 1px dashed #999;
         padding: 5px 10px;
+        border: 1px dashed #999;
         border-radius: 5px;
+        cursor: pointer;
+    }
+    .task {
+        margin-bottom: 5px;
+        padding: 5px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 3px;
         cursor: pointer;
     }
 </style>
@@ -71,23 +75,21 @@
         <input type="number" id="adjustedThroughput" placeholder="Enter adjusted weekly throughput"><br>
         <button onclick="calculateWipLimit()">Calculate WIP Limit</button>
         <p id="wipLimit"></p>
+    </div>
 
-        <div class="kanban-board">
-            <div class="column" id="todo">
-                <h3>To-Do</h3>
-                <div id="todo-tasks"></div>
-                <button class="add-task-button" onclick="addTask('todo')">Add Task</button>
-            </div>
-            <div class="column" id="inProgress">
-                <h3>In Progress</h3>
-                <div id="inProgress-tasks"></div>
-                <button class="add-task-button" onclick="addTask('inProgress')">Add Task</button>
-            </div>
-            <div class="column" id="completed">
-                <h3>Completed</h3>
-                <div id="completed-tasks"></div>
-                <button class="add-task-button" onclick="addTask('completed')">Add Task</button>
-            </div>
+    <div class="kanban-board">
+        <div class="column" id="todo" onclick="moveTask('todo')">
+            <h3>To-Do</h3>
+            <div id="todo-tasks"></div>
+            <button class="add-task-button" onclick="addTask()">Add Task</button>
+        </div>
+        <div class="column" id="inProgress" onclick="moveTask('inProgress')">
+            <h3>In Progress</h3>
+            <div id="inProgress-tasks"></div>
+        </div>
+        <div class="column" id="completed" onclick="moveTask('completed')">
+            <h3>Completed</h3>
+            <div id="completed-tasks"></div>
         </div>
     </div>
 
@@ -109,23 +111,44 @@
         }
 
         function updateKanbanBoard() {
-            document.getElementById("todo-tasks").innerHTML = tasks.todo.map(task => "<p>" + task + "</p>").join("");
-            document.getElementById("inProgress-tasks").innerHTML = tasks.inProgress.map(task => "<p>" + task + "</p>").join("");
-            document.getElementById("completed-tasks").innerHTML = tasks.completed.map(task => "<p>" + task + "</p>").join("");
+            document.getElementById("todo-tasks").innerHTML = tasks.todo.map(task => "<div class='task' onclick='selectTask(this)'>" + task + "</div>").join("");
+            document.getElementById("inProgress-tasks").innerHTML = tasks.inProgress.map(task => "<div class='task' onclick='selectTask(this)'>" + task + "</div>").join("");
+            document.getElementById("completed-tasks").innerHTML = tasks.completed.map(task => "<div class='task' onclick='selectTask(this)'>" + task + "</div>").join("");
         }
 
-        function addTask(column) {
+        function addTask() {
             var task = prompt("Enter task:");
             if (task) {
-                tasks[column].push(task);
+                tasks.todo.push(task);
                 updateKanbanBoard();
             }
+        }
+
+        function moveTask(column) {
+            if (selectedTask) {
+                tasks[column].push(selectedTask.innerText);
+                tasks.todo = tasks.todo.filter(task => task !== selectedTask.innerText);
+                tasks.inProgress = tasks.inProgress.filter(task => task !== selectedTask.innerText);
+                tasks.completed = tasks.completed.filter(task => task !== selectedTask.innerText);
+                selectedTask = null;
+                updateKanbanBoard();
+            }
+        }
+
+        var selectedTask = null;
+        function selectTask(taskElement) {
+            if (selectedTask) {
+                selectedTask.style.backgroundColor = "#fff";
+            }
+            selectedTask = taskElement;
+            selectedTask.style.backgroundColor = "#f0f0f0";
         }
 
         updateKanbanBoard();
     </script>
 </body>
 </html>
+
 
 
 
