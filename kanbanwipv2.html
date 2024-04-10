@@ -71,6 +71,8 @@
         <input type="number" id="teamCapacity" placeholder="Enter team capacity"><br>
         <label for="adjustedThroughput">Adjusted Weekly Throughput:</label>
         <input type="number" id="adjustedThroughput" placeholder="Enter adjusted weekly throughput"><br>
+        <label for="teamMembers">Number of Team Members:</label>
+        <input type="number" id="teamMembers" placeholder="Enter number of team members"><br>
         <button onclick="calculateWipLimit()">Calculate WIP Limit</button>
         <p id="wipLimit"></p>
     </div>
@@ -97,14 +99,23 @@
             completed: []
         };
 
+        var wipLimit = 0;
+        var teamWipLimits = [];
+
         function calculateWipLimit() {
             var teamCapacity = parseInt(document.getElementById("teamCapacity").value);
             var adjustedThroughput = parseInt(document.getElementById("adjustedThroughput").value);
-            var wipLimit = Math.min(teamCapacity, adjustedThroughput);
-            document.getElementById("wipLimit").innerText = "WIP Limit: " + wipLimit;
+            var teamMembers = parseInt(document.getElementById("teamMembers").value);
+            wipLimit = Math.min(teamCapacity, adjustedThroughput);
+            document.getElementById("wipLimit").innerText = "Team WIP Limit: " + wipLimit;
+
+            // Calculate and display individual WIP limits
+            teamWipLimits = Array(teamMembers).fill(Math.floor(wipLimit / teamMembers));
+            teamWipLimits[teamMembers - 1] += wipLimit % teamMembers;
 
             // Change background color based on WIP limit
             document.body.style.backgroundColor = (wipLimit <= teamCapacity) ? 'red' : 'green';
+            updateKanbanBoard();
         }
 
         function updateKanbanBoard() {
@@ -135,14 +146,20 @@
             var taskIndex = tasks.todo.indexOf(taskId);
             if (taskIndex > -1) {
                 tasks.todo.splice(taskIndex, 1);
-                tasks[column].push(taskId);
+                tasks[column].push({ id: taskId, assignedTo: null });
+                updateKanbanBoard();
+            }
+        }
+
+        function assignTask(taskId, memberIndex) {
+            var task = tasks.inProgress.find(task => task.id === taskId);
+            if (task) {
+                task.assignedTo = memberIndex;
                 updateKanbanBoard();
             }
         }
 
         updateKanbanBoard();
-        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="anthea_s" data-description="Support me on Buy me a coffee!" data-message="" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
-
     </script>
 </body>
 </html>
