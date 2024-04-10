@@ -119,15 +119,23 @@
         }
 
         function updateKanbanBoard() {
-            document.getElementById("todo-tasks").innerHTML = tasks.todo.map(task => "<div class='task' id='" + task + "' draggable='true' ondragstart='drag(event)'>" + task + "</div>").join("");
-            document.getElementById("inProgress-tasks").innerHTML = tasks.inProgress.map(task => "<div class='task' id='" + task + "' draggable='true' ondragstart='drag(event)'>" + task + "</div>").join("");
-            document.getElementById("completed-tasks").innerHTML = tasks.completed.map(task => "<div class='task' id='" + task + "' draggable='true' ondragstart='drag(event)'>" + task + "</div>").join("");
+            document.getElementById("todo-tasks").innerHTML = tasks.todo.map(task => "<div class='task' id='" + task.id + "' draggable='true' ondragstart='drag(event)'>" + task.name + " (Assigned to: " + (task.assignedTo !== null ? task.assignedTo : "Unassigned") + ")</div>").join("");
+            document.getElementById("inProgress-tasks").innerHTML = tasks.inProgress.map(task => "<div class='task' id='" + task.id + "' draggable='true' ondragstart='drag(event)'>" + task.name + " (Assigned to: " + (task.assignedTo !== null ? task.assignedTo : "Unassigned") + ")</div>").join("");
+            document.getElementById("completed-tasks").innerHTML = tasks.completed.map(task => "<div class='task' id='" + task.id + "' draggable='true' ondragstart='drag(event)'>" + task.name + " (Assigned to: " + (task.assignedTo !== null ? task.assignedTo : "Unassigned") + ")</div>").join("");
         }
 
         function addTask() {
-            var task = prompt("Enter task:");
-            if (task) {
-                tasks.todo.push(task);
+            var taskName = prompt("Enter task name:");
+            if (taskName) {
+                var assignedTo = null;
+                while (assignedTo === null) {
+                    assignedTo = prompt("Assign task to team member (1-" + teamWipLimits.length + "):");
+                    if (assignedTo !== null && (isNaN(assignedTo) || parseInt(assignedTo) < 1 || parseInt(assignedTo) > teamWipLimits.length)) {
+                        assignedTo = null;
+                        alert("Please enter a valid team member number.");
+                    }
+                }
+                tasks.todo.push({ id: tasks.todo.length + 1, name: taskName, assignedTo: parseInt(assignedTo) });
                 updateKanbanBoard();
             }
         }
@@ -143,18 +151,10 @@
         function drop(ev, column) {
             ev.preventDefault();
             var taskId = ev.dataTransfer.getData("text");
-            var taskIndex = tasks.todo.indexOf(taskId);
+            var taskIndex = tasks.todo.findIndex(task => task.id === parseInt(taskId));
             if (taskIndex > -1) {
                 tasks.todo.splice(taskIndex, 1);
-                tasks[column].push({ id: taskId, assignedTo: null });
-                updateKanbanBoard();
-            }
-        }
-
-        function assignTask(taskId, memberIndex) {
-            var task = tasks.inProgress.find(task => task.id === taskId);
-            if (task) {
-                task.assignedTo = memberIndex;
+                tasks[column].push({ id: parseInt(taskId), name: taskId.name, assignedTo: taskId.assignedTo });
                 updateKanbanBoard();
             }
         }
