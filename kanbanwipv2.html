@@ -80,6 +80,7 @@
     <div class="kanban-board">
         <div class="column" id="todo" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
             <h3>To-Do</h3>
+            <button onclick="addTask()">Add Task</button>
             <div id="todo-tasks" ondragstart="drag(event)" draggable="true"></div>
         </div>
         <div class="column" id="inProgress" ondrop="drop(event, 'inProgress')" ondragover="allowDrop(event)">
