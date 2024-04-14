@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Investment Fees</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+</head>
+<body>
+    <div id="container" style="width: 100%; height: 400px; margin: 0 auto"></div>
+    <script>
+        Highcharts.chart('container', {
+            chart: {
+                polar: true,
+                type: 'line'
+            },
+            accessibility: {
+                description: 'A spiderweb chart compares Next Health against Restore Hyper Wellness within an organization. Each spoke represents one of the following departments: Technology, Franchise, Royalty, and Marketing.'
+            },
+            title: {
+                text: 'Investment Fees',
+                x: -80
+            },
+            pane: {
+                size: '80%'
+            },
+            xAxis: {
+                categories: ['Technology', 'Franchise', 'Royalty', 'Marketing'],
+                tickmarkPlacement: 'on',
+                lineWidth: 0
+            },
+            yAxis: {
+                gridLineInterpolation: 'polygon',
+                lineWidth: 0,
+                min: 0
+            },
+            tooltip: {
+                shared: true,
+                pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+            },
+            legend: {
+                align: 'right',
+                verticalAlign: 'middle',
+                layout: 'vertical'
+            },
+            series: [{
+                name: 'Next Health',
+                data: [7200, 60000, 9, 1],
+                pointPlacement: 'on'
+            }, {
+                name: 'Restore Hyper Wellness',
+                data: [7200, 44500, 7, 4],
+                pointPlacement: 'on'
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            align: 'center',
+                            verticalAlign: 'bottom',
+                            layout: 'horizontal'
+                        },
+                        pane: {
+                            size: '70%'
+                        }
+                    }
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
