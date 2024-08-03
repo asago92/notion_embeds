@@ -1,76 +1,96 @@
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>masinsightdata</title>
+    <title>Market Finder</title>
     <style>
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #004B95;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            background-color: #fff;
+        }
+        header {
+            font-size: 1.5em;
+            color: #202124;
+            margin-bottom: 20px;
         }
         .container {
             max-width: 600px;
+            margin: auto;
             padding: 20px;
         }
-        .logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 50px;
-        }
-        .logo img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-        }
-        .logo-text {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .headline {
+        h1 {
             font-size: 2.5em;
-            line-height: 1.2;
+            color: #202124;
+            margin: 20px 0;
         }
-        .headline .highlight {
-            color: #72C4FF;
+        p {
+            font-size: 1em;
+            color: #5f6368;
+            margin-bottom: 40px;
         }
-        .button {
-            margin-top: 30px;
+        .input-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
         }
-        .button a {
-            background-color: transparent;
-            border: 1px solid white;
-            padding: 10px 20px;
-            color: white;
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        button {
+            padding: 10px;
+            font-size: 1em;
+            background-color: #4285f4;
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            outline: none;
+        }
+        a {
+            color: #1a73e8;
             text-decoration: none;
-            font-size: 1.2em;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+            font-size: 1em;
         }
-        .button a:hover {
-            background-color: white;
-            color: #004B95;
+        .footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .footer img {
+            width: 100%;
+            max-width: 600px;
         }
     </style>
 </head>
 <body>
+    <header>
+        Think with <span style="color: #4285f4;">G</span><span style="color: #ea4335;">o</span><span style="color: #fbbc05;">o</span><span style="color: #4285f4;">g</span><span style="color: #34a853;">l</span><span style="color: #ea4335;">e</span>
+    </header>
     <div class="container">
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-            <div class="logo-text">masinsightdata</div>
+        <h1>Take your business to new markets</h1>
+        <p>Try our free tool to identify new potential markets, discover helpful operational information and start selling to customers at home and around the world.</p>
+        <div class="input-container">
+            <input type="text" placeholder="Let's start with your URL">
+            <button>Continue</button>
         </div>
-        <div class="headline">
-            Let <span class="highlight">data</span> lead the way.
-        </div>
-        <div class="button">
-            <a href="#">Request a Consultation</a>
-        </div>
+        <a href="#">Already have an account? Sign in</a>
+    </div>
+    <div class="footer">
+        <img src="path_to_image/market-finder-footer.png" alt="Market Finder Illustration">
     </div>
 </body>
 </html>
+
