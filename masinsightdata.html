@@ -42,12 +42,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
+            height: 100%;
         }
 
         .grid-background {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+            gap: 10px;
+            position: relative;
             width: 100%;
             height: auto;
-            position: relative;
+            background-color: transparent;
+            z-index: 1;
+        }
+
+        .grid-background div {
+            border: 1px solid #ccc;
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%; /* Maintain square aspect ratio */
         }
 
         .arrow {
@@ -56,6 +71,8 @@
             height: auto;
             top: 15%;
             right: 5%;
+            z-index: 2;
+            transform: rotate(-15deg);
         }
 
         .logo {
@@ -77,7 +94,19 @@
         
         <!-- Right side with grid and arrow -->
         <div class="image-content">
-            <img src="path/to/your/grid-image.png" alt="Grid Background" class="grid-background"> <!-- Replace with actual grid image path -->
+            <div class="grid-background">
+                <!-- Creating a 10x10 grid -->
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
             <img src="path/to/your/arrow-image.png" alt="Arrow" class="arrow"> <!-- Replace with actual arrow image path -->
         </div>
     </div>
@@ -218,6 +247,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.5/lottie.min.js"></script>
 </body>
 </html>
+
 
 
 
