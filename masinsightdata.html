@@ -3,92 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>masinsightdata</title>
-  
-        /* Page 2 Styles */
-        .page2 {
-            background-color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .page2 h2 {
-            font-size: 24px;
-            color: #333;
-            margin-top: 20px;
-            font-family: Arial, sans-serif;
-        }
-
-        .page2 p {
-            font-size: 16px;
-            color: #666;
-            margin: 10px 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .recommendation {
-            background-color: #e9c46a;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .video-container, .footer {
-            margin-top: 20px;
-        }
-
-        .footer {
-            background-color: #f1f1f1;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
-
-        .footer div {
-            flex: 1;
-            padding: 10px;
-        }
-
-        iframe {
-            width: 100%;
-            height: 315px;
-        }
-
-        .tabs {
-            margin-top: 20px;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .tab-buttons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        .tab-buttons button {
-            padding: 10px 20px;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blueprint for Better Insights</title>
     <style>
         body {
@@ -120,12 +34,6 @@
             font-size: 3em;
             margin: 0;
             font-weight: normal;
-            color: #333;
-        }
-
-        .text-content p {
-            font-size: 1.5em;
-            margin-top: 20px;
             color: #333;
         }
 
@@ -176,35 +84,104 @@
 </body>
 </html>
 
-    <!-- Page 2: Sales Prediction Model -->
-    <div class="page2">
-        <h1>Sales Prediction Model</h1>
-        <div id="lottie-animation"></div>
-        <p>Refine business strategy, optimize resources, or set goals in a few clicks!</p>
+<!-- Page 2 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Prediction Model</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            font-size: 24px;
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #666;
+        }
+        .recommendation {
+            background-color: #e9c46a;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .video-container, .footer {
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+        .footer div {
+            flex: 1;
+            padding: 10px;
+        }
+        iframe {
+            width: 100%;
+            height: 315px;
+        }
+        .tabs {
+            margin-top: 20px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .tab-buttons button {
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sales Prediction Model</h1>
 
-        <div class="tabs">
-            <div class="tab-buttons">
-                <button onclick="showTab('tutorial')">💡 Tutorial</button>
-                <button onclick="showTab('sales')">📊 Sales Prediction</button>
+    <div id="lottie-animation"></div>
+    <p>Refine business strategy, optimize resources, or set goals in a few clicks!</p>
+
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button onclick="showTab('tutorial')">💡 Tutorial</button>
+            <button onclick="showTab('sales')">📊 Sales Prediction</button>
+        </div>
+        
+        <div id="tutorial" class="tab-content">
+            <div class="recommendation">
+                <h2>Apply the right model according to your data and Industry:</h2>
+                <p><strong>ARIMA:</strong> Focuses on modeling the relationships between past observations in time series data. <strong>Suitable Industry:</strong> Finance, Healthcare, Manufacturing, Marketing.</p>
+                <p><strong>Holt-Winters:</strong> Captures trend and seasonality in time series data. <strong>Suitable Industry:</strong> Retail, Hospitality, Agriculture, Energy.</p>
             </div>
-            
-            <div id="tutorial" class="tab-content active">
-                <div class="recommendation">
-                    <h2>Apply the right model according to your data and Industry:</h2>
-                    <p><strong>ARIMA:</strong> Focuses on modeling the relationships between past observations in time series data. <strong>Suitable Industry:</strong> Finance, Healthcare, Manufacturing, Marketing.</p>
-                    <p><strong>Holt-Winters:</strong> Captures trend and seasonality in time series data. <strong>Suitable Industry:</strong> Retail, Hospitality, Agriculture, Energy.</p>
-                </div>
-                <div class="video-container">
-                    <video controls>
-                        <source src="videos/salespredictv2.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
+            <div class="video-container">
+                <video controls>
+                    <source src="videos/salespredictv2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
-            
-            <div id="sales" class="tab-content">
-                <p>Interactive functionality for uploading CSVs and generating forecasts is not supported in static HTML. Please implement with JavaScript or a server-side language.</p>
-            </div>
+        </div>
+        
+        <div id="sales" class="tab-content">
+            <p>Interactive functionality for uploading CSVs and generating forecasts is not supported in static HTML. Please implement with JavaScript or a server-side language.</p>
         </div>
     </div>
 
