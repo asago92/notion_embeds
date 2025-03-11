@@ -19,7 +19,11 @@
                 description: 'A spiderweb chart highlighting circuit characteristics.'
             },
             title: {
-                text: 'Circuit Information',
+                text: 'Albert Circuit Information',
+                x: -80
+            },
+            subtitle: {
+                text: 'A radar chart highlighting circuit characteristics',
                 x: -80
             },
             pane: {
@@ -40,16 +44,18 @@
                 pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>'
             },
             legend: {
-                align: 'right',
-                verticalAlign: 'middle',
-                layout: 'vertical'
+                enabled: false // Remove legend
             },
             series: [{
                 name: 'Albert Circuit',
                 data: [2, 3, 2, 2, 2, 3, 3, 3],
                 pointPlacement: 'on',
                 color: 'orange', // Set color to orange
-                fillOpacity: 0.5 // Adjust fill opacity for visibility
+                fillOpacity: 0.5, // Adjust fill opacity for visibility
+                dataLabels: {
+                    enabled: true, // Enable data labels
+                    format: '{y}'
+                }
             }],
             responsive: {
                 rules: [{
@@ -72,4 +78,5 @@
     </script>
 </body>
 </html>
+
 
