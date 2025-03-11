@@ -1,0 +1,105 @@
+Highcharts.chart('container', {
+    colors: ['#FFD700', '#C0C0C0', '#CD7F32'],
+    chart: {
+        type: 'column',
+        inverted: true,
+        polar: true
+    },
+    title: {
+        text: 'Melbourne Pit stops'
+    },
+    subtitle: {
+        text: 'Source: ' +
+            '<a href="https://www.pirelli.com/global/en-ww/emotions-and-numbers/formula-1-rolex-australian-grand-prix-2024-123044/</a>'
+    },
+    tooltip: {
+        outside: true
+    },
+    pane: {
+        size: '85%',
+        innerSize: '20%',
+        endAngle: 270
+    },
+    xAxis: {
+        tickInterval: 1,
+        labels: {
+            align: 'right',
+            useHTML: true,
+            allowOverlap: true,
+            step: 1,
+            y: 3,
+            style: {
+                fontSize: '13px'
+            }
+        },
+        lineWidth: 0,
+        gridLineWidth: 0,
+        categories: [
+            'Sainz <span class="f16"><span id="flag" class="flag no">' +
+            '</span></span>',
+            'Leclerc <span class="f16"><span id="flag" class="flag us">' +
+            '</span></span>',
+            'Norris <span class="f16"><span id="flag" class="flag de">' +
+            '</span></span>',
+            'Piastri <span class="f16"><span id="flag" class="flag at">' +
+            '</span></span>',
+            'Perez <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Stroll <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Tsunoda <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Alonso <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Hulkenburg <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Magnussen <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Albon <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Ricciardo <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Gasly <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Bottas <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Zhou <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Ocon <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Russell <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Hamilton <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+            'Verstappen <span class="f16"><span id="flag" class="flag ca">' +
+            '</span></span>',
+        ]
+    },
+    yAxis: {
+        lineWidth: 0,
+        tickInterval: 25,
+        reversedStacks: false,
+        endOnTick: true,
+        showLastLabel: true,
+        gridLineWidth: 0
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            borderWidth: 0,
+            pointPadding: 0,
+            groupPadding: 0.15,
+            borderRadius: '50%'
+        }
+    },
+    series: [{
+        name: 'Hard',
+        data: [42, 49, 44, 49, 44, 50, 49, 34, 40, 50, 51, 52, 57, 57, 51, 57, 58, 15, 0 ]
+    }, {
+        name: 'Medium',
+        data: [16, 9, 14, 9, 14, 8, 9, 24, 18, 7, 6, 0, 17, 8, 0, 9, 0, 3 ]
+    }, {
+        name: 'Soft',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 6, 0, 7, 0 ]
+    }]
+});
