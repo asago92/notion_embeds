@@ -13,7 +13,7 @@
         Highcharts.chart('container', {
             chart: {
                 polar: true,
-                type: 'line'
+                type: 'area' // Change to area for filled chart
             },
             accessibility: {
                 description: 'A spiderweb chart highlighting circuit characteristics.'
@@ -47,8 +47,9 @@
             series: [{
                 name: 'Albert Circuit',
                 data: [2, 3, 2, 2, 2, 3, 3, 3],
-                pointPlacement: 'on'
-          
+                pointPlacement: 'on',
+                color: 'orange', // Set color to orange
+                fillOpacity: 0.5 // Adjust fill opacity for visibility
             }],
             responsive: {
                 rules: [{
@@ -71,3 +72,4 @@
     </script>
 </body>
 </html>
+
